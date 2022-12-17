@@ -20,8 +20,8 @@ public class Repository implements AutoCloseable {
     }
 
     public void AddStatesWithPrefectures(ArrayList<State> stateList) {
-        for (State state : stateList) {
-            try (var session = driver.session()) {
+        try (var session = driver.session()) {
+            for (State state : stateList) {
                 session.executeWrite(tx -> AddState(state).consume());
 
                 for (Prefecture prefecture : state.getPrefectureList()) {
